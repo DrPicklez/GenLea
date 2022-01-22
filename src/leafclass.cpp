@@ -4,13 +4,13 @@ void LeafClass::setup(int wid, int hig, int _nPoints){
     width = wid;
     height = hig;
     nPoints = _nPoints;
-    createLeaf();
+    createBFly();
 
 
 }
 //--------------------------------------------------------------
-void LeafClass::createLeaf(){
-    edgePoints = startLeafPoints();
+void LeafClass::createBFly(){
+    edgePoints = startWingPoints();
     float curveL = (1. / ofGetWidth()) * ofGetMouseX();
     float curveR = (1. / ofGetHeight()) * ofGetMouseY();
 
@@ -23,20 +23,7 @@ void LeafClass::createLeaf(){
 
 //--------------------------------------------------------------
 void LeafClass::draw(){
-    createLeaf();
-    for(int i = 0; i < edgePoints.size(); i++){
-        ofSetColor(ofColor::greenYellow);
-        ofDrawEllipse(edgePoints[i], 20, 20);
-        ofSetColor(ofColor::red);
-        ofDrawBitmapString(ofToString(i % int(edgePoints.size()/2)),edgePoints[i]);     //points / 2 = n
-    }
-    for(int i = 0; i < stemPoints.size(); i++){
-        ofSetColor(ofColor::yellowGreen);
-        ofDrawEllipse(stemPoints[i], 20, 20);
-        ofSetColor(ofColor::red);
-        ofDrawBitmapString(ofToString(i),stemPoints[i]);
-    }
-
+    createBFly();
 
     for(int i = 0; i < edgePoints.size()/2 -1; i++){
         int n = i;
@@ -49,7 +36,7 @@ void LeafClass::draw(){
     }
 }
 //--------------------------------------------------------------
-vector<ofVec2f> LeafClass::startLeafPoints(){
+vector<ofVec2f> LeafClass::startWingPoints(){
     int halfway = nPoints / 2;
     vector <ofVec2f> _points;
     for(int i = 0; i < nPoints; i++){
